@@ -37,9 +37,10 @@ const useGetList = () => {
 
   useEffect(() => {
     const getList = async () => {
-        const response = await fetch("http://localhost:3000/list");
+        const response = await fetch("http://localhost:3004/list");
         const data = await response.json();
         console.log(data);
+        setComments(_.orderBy(data,'like','desc'))
       } 
     getList();
   }, []);
