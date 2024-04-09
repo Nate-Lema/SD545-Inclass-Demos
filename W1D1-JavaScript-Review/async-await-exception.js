@@ -13,6 +13,13 @@ async function bar(){
         console.log('inside finally');
     }
 }
-bar();
+// bar();
+function bar(arr){
+console.log(arr)
+}
+
+const b = ''
+bar(arr)
+bar()
 
 console.log('end');

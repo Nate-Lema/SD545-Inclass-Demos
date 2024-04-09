@@ -2,23 +2,23 @@
 //temperature in Celsius and converts it to Fahrenheit when a button is clicked.
 //Use useState to manage the temperature input and output.
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 function TemperatureConverter() {
   const [temperatureFahrenheit, setTemperatureFahrenheit] = useState<
     number | null
   >(null);
+  const inputRef = useRef(null)
+
 
   const convertToFahrenheit = (celsius: number) => {
     return (celsius * 9 / 5 )+ 32;
   };
 
   const handleConvertClick = () => {
-    const celsius = parseInt(
-      (document.getElementById("inputId") as HTMLInputElement).value
-    );
+    const celsius = inputRef.current! as HTMLInputElement
     if (celsius) {
-      const convertedTemperature = convertToFahrenheit(celsius);
+      const convertedTemperature = convertToFahrenheit(+celsius.value);
       setTemperatureFahrenheit(convertedTemperature);
     }
   };
@@ -28,7 +28,7 @@ function TemperatureConverter() {
       {temperatureFahrenheit !== null && (
         <p>{temperatureFahrenheit}°F</p>
       )}
-      <input id="inputId" placeholder="Enter temperature in °C" type="text" />
+      <input ref={inputRef} placeholder="Enter temperature in °C" type="text" />
       <button onClick={handleConvertClick}>
         Convert Celsius To Fahrenheit
       </button>
