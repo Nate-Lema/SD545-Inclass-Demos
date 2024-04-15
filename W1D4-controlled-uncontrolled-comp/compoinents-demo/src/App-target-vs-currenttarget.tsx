@@ -3,8 +3,8 @@ import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 function App() {
   
   const handleClickOnDiv = (e: MouseEvent<HTMLDivElement>) => {
-      console.log(e.target); //the html element you clicked on 
-      console.log(e.currentTarget); // the element you attach the listener
+      console.log(`Target: ${e.target}`); //the html element you clicked on 
+      console.log(`currentTarget: ${e.currentTarget}`); // the element you attach the listener
   }
 
   return (

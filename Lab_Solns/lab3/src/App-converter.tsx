@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 // controlled component

@@ -4,12 +4,12 @@ function Counter() {
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => {
+    const id = setTimeout(() => {
       console.log('inside setInterval: ', counter);
       setCounter(counter + 1);
     }, 1000);
     return () => {
-      clearInterval(id);
+      clearTimeout(id);
     }
   }, [counter])
  

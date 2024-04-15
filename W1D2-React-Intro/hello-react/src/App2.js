@@ -23,7 +23,7 @@ function App() { //Component: return jsx
       <div>
         <input type='text' />
       </div>
-      <Foo></Foo>
+      <Foo/>
     </>
   );
 }
