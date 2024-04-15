@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import Todo from "../../types";
 import "./index.css";
 
@@ -13,6 +13,8 @@ export default function Item(props: Props) {
   const { todo, onDeleteTodoById, onUpdateTodo } = props;
   const { id, name, done } = todo;
 
+  
+
   return (
     <li
       onMouseOver={() => setIsHovering(true)}
@@ -22,7 +24,7 @@ export default function Item(props: Props) {
         <input
           type="checkbox"
           checked={done}
-          onChange={() => onUpdateTodo(id)}
+          onChange={()=>onUpdateTodo(id)}
         />
         <span>{name}</span>
       </label>

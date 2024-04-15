@@ -33,9 +33,9 @@ function App() {
       )
     );
   };
-  const updateTodos = () => {
+  const updateTodos = (value:boolean) => {
     setTodos(
-      todos.map((todo) => (todos ? { ...todo, done: !todo.done } : todo))
+      todos.map((todo) => (todos ? { ...todo, done: value } : todo))
     );
   };
   const deleteFinishedTasks = () => {
