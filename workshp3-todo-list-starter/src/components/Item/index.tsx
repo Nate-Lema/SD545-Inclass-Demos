@@ -9,23 +9,25 @@ type Props = {
 };
 
 export default function Item(props: Props) {
-  const { todo, onDeleteTodoById, onUpdateTodo } = props;
   const [isHovering, setIsHovering] = useState(false);
-  
+  const { todo, onDeleteTodoById, onUpdateTodo } = props;
+  const { id, name, done } = todo;
+
   return (
     <li
       onMouseOver={() => setIsHovering(true)}
       onMouseOut={() => setIsHovering(false)}
     >
       <label>
-        <input type="checkbox" checked={todo.done} onChange={()=>onUpdateTodo(todo.id)} />
-        <span>{todo.name}</span>
+        <input
+          type="checkbox"
+          checked={done}
+          onChange={() => onUpdateTodo(id)}
+        />
+        <span>{name}</span>
       </label>
       {isHovering && (
-        <button
-          className="btn btn-danger"
-          onClick={() => onDeleteTodoById(todo.id)}
-        >
+        <button className="btn btn-danger" onClick={() => onDeleteTodoById(id)}>
           Delete
         </button>
       )}

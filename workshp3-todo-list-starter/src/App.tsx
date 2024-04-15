@@ -18,7 +18,9 @@ function App() {
   }, []);
 
   const deleteTodoById = (id: string) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    if (window.confirm("Are you sure?")) {
+      setTodos(todos.filter((todo) => todo.id !== id));
+    }
   };
 
   const addTodoList = (todo: Todo) => {
