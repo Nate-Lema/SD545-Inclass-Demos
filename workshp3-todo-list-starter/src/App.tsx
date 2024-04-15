@@ -36,7 +36,7 @@ function App() {
       todos.map((todo) => (todos ? { ...todo, done: !todo.done } : todo))
     );
   };
-  const deleteAllFinishedTasks = () => {
+  const deleteFinishedTasks = () => {
     setTodos(todos.filter((todo) => !todo.done));
   };
 
@@ -52,7 +52,7 @@ function App() {
         <Footer
           todos={todos}
           onUpdateTodos={updateTodos}
-          onDeleteAllFinishedTasks={deleteAllFinishedTasks}
+          onDeleteFinishedTasks={deleteFinishedTasks}
         />
       </div>
     </div>

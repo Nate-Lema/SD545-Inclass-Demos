@@ -4,10 +4,10 @@ import "./index.css";
 type Props = {
   todos: Todo[];
   onUpdateTodos: () => void;
-  onDeleteAllFinishedTasks: () => void;
+  onDeleteFinishedTasks: () => void;
 };
 export default function Footer(props: Props) {
-  const { todos, onUpdateTodos, onDeleteAllFinishedTasks } = props;
+  const { todos, onUpdateTodos, onDeleteFinishedTasks } = props;
   return (
     <div className="todo-footer">
       <label>
@@ -26,7 +26,7 @@ export default function Footer(props: Props) {
       </span>
       <button
         className="btn btn-danger"
-        onClick={onDeleteAllFinishedTasks}
+        onClick={onDeleteFinishedTasks}
       >
         Delete Finished Tasks
       </button>
