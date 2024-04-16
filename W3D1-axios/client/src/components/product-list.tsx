@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+// import { MouseEvent, useState } from "react";
+import Product from "../types/product";
+import productService from "../apis/service/product.service";
 
-type Product = {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
+type Props = {
+  products: Product[];
+  onDeleteProductById: (id: number) => void;
 };
-export default function ProductList() {
-  const [products, setProducts] = useState<Product[]>([]);
 
-  useEffect(() => {
-    const getProduct = async () => {
-      const response = await axios.get("http://localhost:8000/products");
-      setProducts(response.data);
-    };
-    getProduct();
-  }, []);
+export default function ProductList(props: Props) {
+  const { products, onDeleteProductById } = props;
 
+  const deleteProductHandler = async (id: number) => {
+    const response = await productService.deleteProduct(id);
+    if (response.status === 200) {
+      onDeleteProductById(id);
+    }
+  };
 
   return (
     <div>
@@ -38,6 +36,14 @@ export default function ProductList() {
               <td>{prod.title}</td>
               <td>{prod.price}</td>
               <td>{prod.description}</td>
+              <td>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => deleteProductHandler(prod.id!)}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
