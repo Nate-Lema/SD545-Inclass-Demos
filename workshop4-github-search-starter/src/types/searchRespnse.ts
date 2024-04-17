@@ -4,5 +4,5 @@ export default interface SearchResponse {
   isFirst: boolean;
   isLoading: boolean;
   isError: boolean;
-  user: User[];
+  users: User[];
 }

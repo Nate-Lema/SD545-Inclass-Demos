@@ -1,31 +1,47 @@
+import React, {useRef,} from "react";
+import PubSub from "pubsub-js";
 import axios from "axios";
-import React, { ChangeEvent, useEffect, useState } from "react";
-import User from "../../types/user";
 
-type Props = {
-  onSetGithubUsers: (user: User[]) => void;
-};
 
-export default function Search(props: Props) {
-  const { onSetGithubUsers } = props;
-  const [user, setUser] = useState("");
+export default function Search() {
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const changeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setUser(e.target.value);
-  };
   const search = async () => {
-    if (!user.trim()) {
-      return;
-    } else {
+    PubSub.publish("sd545", {
+      isFirst: false,
+      isLoading: true,
+      isError: false,
+      users: [],
+    });
+    try {
       const response = await axios.get(
-        `https://api.github.com/search/users?q=${user}`
+        `https://api.github.com/search/users?q=${inputRef.current!.value}`
       );
-      console.log(response.data);
       if (response.status === 200) {
-        onSetGithubUsers(response.data.items);
+        PubSub.publish("sd545", {
+          isFirst: false,
+          isLoading: false,
+          isError: false,
+          users: response.data.items,
+        });
+      } else {
+        PubSub.publish("sd545", {
+          isFirst: false,
+          isLoading: false,
+          isError: true,
+          users: [],
+        });
       }
+    } catch (e) {
+      PubSub.publish("sd545", {
+        isFirst: false,
+        isLoading: false,
+        isError: true,
+        users: [],
+      });
     }
   };
+
 
   return (
     <section className="jumbotron">
@@ -34,7 +50,7 @@ export default function Search(props: Props) {
         <input
           type="text"
           placeholder="enter the name you search"
-          onChange={changeInput}
+          ref={inputRef}
         />
         &nbsp;<button onClick={search}>Search</button>
       </div>
